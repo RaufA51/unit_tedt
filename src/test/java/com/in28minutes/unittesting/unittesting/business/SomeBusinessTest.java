@@ -27,7 +27,7 @@ public class SomeBusinessTest {
 	public void calculateSum_oneValue() {
 		SomeBusinessImpl business = new SomeBusinessImpl();
 		int actualResult = business.calculateSum(new int[] { 5});
-		int expectedResult = 5;
+		int expectedResult = 6;
 		assertEquals(expectedResult, actualResult);	
 	}
 }
