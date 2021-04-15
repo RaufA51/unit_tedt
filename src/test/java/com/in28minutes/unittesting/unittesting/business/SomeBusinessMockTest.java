@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import com.in28minutes.unittesting.unittesting.data.SomeDataService;
 
 @ExtendWith(MockitoExtension.class)
-public class SomeBusinessMockTest {
+public class SomeBusinessMockTest{
 
 	@InjectMocks
 	SomeBusinessImpl business;

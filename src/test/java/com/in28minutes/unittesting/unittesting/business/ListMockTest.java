@@ -34,14 +34,20 @@ public class ListMockTest {
 		when(mock.size()).thenReturn(5).thenReturn(10);
 		assertEquals(5, mock.size());
 		assertEquals(10, mock.size());
+		assertEquals(10, mock.size());
 	}
 
 	@Test
 	@Disabled
 	public void returnWithParameters() {
-		when(mock.get(0)).thenReturn("in28Minutes");
+		when(mock.get(0)).thenReturn("in28Minutes").thenReturn("Abdullayev");
+		when(mock.get(1)).thenReturn("Rauf");
+		/*assertEquals("in28Minutes", mock.get(0));
+		assertEquals(null, mock.get(1));*/
 		assertEquals("in28Minutes", mock.get(0));
-		assertEquals(null, mock.get(1));
+		assertEquals("Rauf", mock.get(1));
+		assertEquals("Abdullayev", mock.get(0));
+		System.out.println(mock.get(1) + " " + mock.get(0));
 	}
 
 	@Test
@@ -57,47 +63,61 @@ public class ListMockTest {
 		// SUT
 		String value1 = mock.get(0);
 		String value2 = mock.get(1);
-
+//		String value4 = mock.get(0);
+//		String value3 = mock.get(2);
 		// Verify
+
+		// 0 ci indexin default olaraq 1 defe cagrilib cagrilmadigini mueyyen edir 1 den cox ve az ola bilmez
 		verify(mock).get(0);
+
+		// mock listinden 2 defe get edildiyini check eliyir 2 den cox veya az olmaz
 		verify(mock, times(2)).get(anyInt());
+
+		// en az 1 defe get edildiyini cek eliyir
+		// yeni en azi 1 defe check edilmelidi
 		verify(mock, atLeast(1)).get(anyInt());
+
+		// ixtiyari indexin en az 1 defe get edilmesini teleb edir
 		verify(mock, atLeastOnce()).get(anyInt());
+
+		// mock listinden max 2 defe get edile bileceyini check eliyir
 		verify(mock, atMost(2)).get(anyInt());
+
+		// hec vaxt 2 indexinin cagrilmamasini check eliyir
 		verify(mock, never()).get(2);
 	}
 
 	@Test
 	public void argumentCapturing() {
-		
+
 		//SUT
 		mock.add("SomeString");
-		
+
 		//Verification
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 		verify(mock).add(captor.capture());
-		
+
 		assertEquals("SomeString", captor.getValue());
-		
+
 	}
-	
+
 	@Test
 	public void multipleArgumentCapturing() {
-		
+
 		//SUT
 		mock.add("SomeString1");
 		mock.add("SomeString2");
-		
+
 		//Verification
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
-		
+
 		verify(mock, times(2)).add(captor.capture());
-		
+
 		List<String> allValues = captor.getAllValues();
-		
+
 		assertEquals("SomeString1", allValues.get(0));
 		assertEquals("SomeString2", allValues.get(1));
-		
+
 	}
 
 	@Test
@@ -121,15 +141,15 @@ public class ListMockTest {
 		arrayListSpy.add("Test");
 		arrayListSpy.add("Test2");
 		System.out.println(arrayListSpy.size());//3
-		
+
 		when(arrayListSpy.size()).thenReturn(5);
 		System.out.println(arrayListSpy.size());//5
-		
+
 		arrayListSpy.add("Test4");
 		System.out.println(arrayListSpy.size());//5
-		
+
 		verify(arrayListSpy).add("Test4");
 	}
 
-	
+
 }

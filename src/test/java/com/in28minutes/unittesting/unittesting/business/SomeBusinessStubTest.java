@@ -35,7 +35,7 @@ public class SomeBusinessStubTest {
 		business.setSomeDataService(new SomeDataServiceStub());
 		int actualResult = business.calculateSumUsingDataService();
 		int expectedResult = 6;
-		assertEquals(expectedResult, actualResult);
+		assertEquals(expectedResult, actualResult,"yox qaga");
 	}
 
 	@Test
