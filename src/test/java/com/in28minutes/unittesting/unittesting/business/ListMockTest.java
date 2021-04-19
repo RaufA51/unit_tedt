@@ -92,13 +92,10 @@ public class ListMockTest {
 
 		//SUT
 		mock.add("SomeString");
-
 		//Verification
 		ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
 		verify(mock).add(captor.capture());
-
 		assertEquals("SomeString", captor.getValue());
-
 	}
 
 	@Test
@@ -123,33 +120,56 @@ public class ListMockTest {
 	@Test
 	public void mocking() {
 		ArrayList arrayListMock = mock(ArrayList.class);
+
+		// mocladigimiza gore asagidaki emeliyyat nullPointerException vermir
 		System.out.println(arrayListMock.get(0));//null
+
+		// size 0-dir
 		System.out.println(arrayListMock.size());//0
+
 		arrayListMock.add("Test");
 		arrayListMock.add("Test2");
+
+		// mocladigimiza gore helede 0-dir
 		System.out.println(arrayListMock.size());//0
+
 		when(arrayListMock.size()).thenReturn(5);
+
+		// burda isə artıq size 5 dir
 		System.out.println(arrayListMock.size());//5
+
+		// ve yene de null qayidacaq asagidaki
+		System.out.println(arrayListMock.get(0));
+
+		// burda xeta verecek cunki Test4 u gormur listde
+		// verify(arrayListMock).add("Test4");
 	}
 
 	@Test
 	public void spying() {
 		ArrayList arrayListSpy = spy(ArrayList.class);
+		// burda mocladiqda nullPointerException vermir ancaq spy da exception verir
+		// System.out.println(arrayListSpy.get(0));
 		arrayListSpy.add("Test0");
 		System.out.println(arrayListSpy.get(0));//Test0
+
+		// spy da size da deyisir
 		System.out.println(arrayListSpy.size());//1
 		arrayListSpy.add("Test");
 		arrayListSpy.add("Test2");
 		System.out.println(arrayListSpy.size());//3
 
+		// sonra arrayListSpy.size() cagrilanda 5 qaytarsin hemise
 		when(arrayListSpy.size()).thenReturn(5);
 		System.out.println(arrayListSpy.size());//5
 
 		arrayListSpy.add("Test4");
 		System.out.println(arrayListSpy.size());//5
 
+		// Test4 un artirilib artirilmadigini yoxluyur
 		verify(arrayListSpy).add("Test4");
 	}
+
 
 
 }
